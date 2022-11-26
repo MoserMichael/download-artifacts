@@ -1,12 +1,12 @@
 
 ### Script for downloading artifacts
 
-The script ```download-github-artifacts.sh``` downloads the artifacts of the latest release for a github repository on a given github user.
+
+The bash script ```download-github-artifacts.sh``` for downloading the artifacts of the latest release for a given github repo of a given user.
 
 How to use:
 
 ```
-./download-github-artifacts.sh -h
 ./download-github-artifacts.sh -u <github user> -r <github reporsitory> [-v -h]
 
 for a given github user and repository: downloads all artifacts for the latest release .
@@ -14,6 +14,9 @@ for a given github user and repository: downloads all artifacts for the latest r
     -u <github user>        - github user
     -r <github repository>  - repository of the given user
     -o <outputdir>          - optional (default: download to current dir
+
+    -v                      - verbose output
+    -h                      - show this help text
 ```
 
 ### Example usage:

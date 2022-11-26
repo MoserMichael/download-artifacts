@@ -28,6 +28,6 @@ for a given github user and repository: downloads all artifacts for the latest r
 Downloads artifacts of this wonderful repository: https://github.com/robxu9/bash-static
 
 
-### requirements
+### Requirements
 
 The script requires ```curl``` and ```jq```

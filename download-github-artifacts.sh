@@ -67,14 +67,14 @@ if [[ $REPO == "" ]]; then
     Help "repository not given"
 fi
 
-LATEST_TAG=$(curl -L -s -S  -H "Accept: application/json" https://github.com/${USER}/${REPO}/releases/latest | jq --raw-output .tag_name)
+LATEST_TAG=$(curl -L -s -S  -H "Accept: application/json" "https://github.com/${USER}/${REPO}/releases/latest" | jq --raw-output .tag_name)
 
 echo "Latest release tag: ${LATEST_TAG}"
 
-for artifact in $(curl -L -s -S -H "Accept: application/vnd.github+json" https://api.github.com/repos/${USER}/${REPO}/actions/artifacts | jq --raw-output '.artifacts[] | select(.expired==false) | .name'); do
+for artifact in $(curl -L -s -S -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${USER}/${REPO}/actions/artifacts" | jq --raw-output '.artifacts[] | select(.expired==false) | .name'); do
     echo "downloading artifact: ${artifact} to: ${DIR}/${artifact}"
     ARTIFACT_URL="https://github.com/${USER}/${REPO}/releases/download/${LATEST_TAG}/${artifact}"
-    curl -L -s -S ${ARTIFACT_URL} -o ${DIR}/${artifact}
+    curl -L -s -S "${ARTIFACT_URL}" -o "${DIR}/${artifact}"
 done
 
 

@@ -8,11 +8,6 @@ function Help {
         echo "Error: $*"
     fi
 
-    if [[ ! -z "${SHORT_HELP_MODE}" ]]; then
-        echo "-s <source filter> -f <from> -t <to> [-v -h] : find replace in multiple files"
-        exit 1
-    fi
-
 cat <<EOF
 $0 -u <github user> -r <github reporsitory> [-v -h]
 
@@ -20,7 +15,7 @@ for a given github user and repository: downloads all artifacts for the latest r
 
     -u <github user>        - github user
     -r <github repository>  - repository of the given user
-    -o <outputdir>          - optional (default: download to current dir
+    -o <outputdir>          - optional (default: download to current dir)
     
     -v                      - verbose output
     -h                      - show this help text
@@ -31,7 +26,7 @@ exit 1
 }
 
 # True iff all arguments are executable in $PATH , from: https://stackoverflow.com/questions/6569478/detect-if-executable-file-is-on-users-path
-function assert_bin_in_path {
+function assert_bins_in_path {
   if [[ -n $ZSH_VERSION ]]; then
     builtin whence -p "$1" &> /dev/null
   else  # bash:
@@ -43,7 +38,7 @@ function assert_bin_in_path {
   fi    
   if [[ $# -gt 1 ]]; then
     shift  # We've just checked the first one
-    assert_bin_in_path "$@"
+    assert_bins_in_path "$@"
   fi
 }
 
@@ -76,7 +71,7 @@ while getopts "hvu:r:o:" opt; do
    esac
 done	
 
-assert_bin_in_path "jq" "curl"
+assert_bins_in_path "jq" "curl"
 
 if [[ $USER == "" ]]; then
     Help "user not given"
